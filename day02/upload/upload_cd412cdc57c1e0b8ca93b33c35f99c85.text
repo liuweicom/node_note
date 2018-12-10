@@ -1,0 +1,104 @@
+Vue.component
+***********Vue.component使用的时候并不是随便使用的，要在初始化实例之前注册组件
+**********data必须时函数
+
+使用方式：
+所有的vue组建同时都是vue的实力，可以接受相同的选项对象(除了一些根级特有的选项)，并提供相同的生命周期钩子
+
+注册方式：
+全局注册和局部注册
+全局注册：
+方式一：
+/ 注册
+Vue.component('my-component', {
+  template: '<div>A custom component!</div>'
+})
+var vm = new Vue({
+  el: '#example',
+  data: {
+       
+  } 
+})
+
+方式二：
+通过注册方式，通过全局的APi：Vue.extend()
+// 注册
+var MyComponent = Vue.extend({
+  template: '<div>A custom component!</div>'
+});
+
+// 注册
+Vue.component('my-component', MyComponent);
+var vm = new Vue({
+  el: '#example',
+  data: {
+       
+  }
+})
+
+vue.extend(options)的使用
+参数{Object} options,包含组建选项的对象
+*************data选项的hi特列，必须注意Vue.extend()中他必须是函数
+// 创建构造器
+var Profile = Vue.extend({
+  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+  data: function () {
+    return {
+      firstName: 'Walter',
+      lastName: 'White',
+      alias: 'Heisenberg'
+    }
+  }
+})
+// 创建 Profile 实例，并挂载到一个元素上。
+new Profile().$mount('#mount-point')
+
+vm.$mount([elementOrSelector])手动挂载一个未挂载的实例
+参数：{Element | string} [elementOrSelector]
+	{boolean} [hydrating]
+返回值：vm实例自身
+如果没有提供[elementOrSelector]参数，模板将被渲染为文档之外的元素，并且必须使用原生DOM api把它插入文档中。
+
+var MyComponent = Vue.extend({
+  template: '<div>Hello!</div>'
+})
+
+// 创建并挂载到 #app (会替换 #app)
+new MyComponent().$mount('#app')
+
+// 同上
+new MyComponent({ el: '#app' })
+
+// 或者，在文档之外渲染并且随后挂载
+var component = new MyComponent().$mount()
+document.getElementById('app').appendChild(component.$el)
+
+
+局部注册：通过某个Vue实例的实例选项components注册仅在作用域中可用的组件
+
+var Child = {
+  template: '<div>A custom component!</div>'
+}
+
+new Vue({
+  // ...
+  components: {
+    // <my-component> 将只在父组件模板中可用
+    'my-component': Child
+  }
+})
+
+这种封装也可适用于其他可注册的Vue功能比如指令
+
+
+
+
+http://www.codes51.com/itwd/4365681.html
+(vue.js)element中的el-input组件中change事件中修改v-model的值不会生效？
+
+
+
+
+
+
+
