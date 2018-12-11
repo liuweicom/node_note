@@ -11,6 +11,8 @@ app.use(express.static('./uploads'));
 // 路由
 app.get('/',router.showIndex);
 app.get('/:album',router.showAlbum);
+app.get('/up',router.showUp);
+app.post('/up',router.doPost);
 app.use(function (req, res) {
     res.render('err',{
         "a": 1

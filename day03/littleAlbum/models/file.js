@@ -25,11 +25,12 @@ exports.getAllDirectory = function (callback) {
 }
 
 exports.getAllAlbums = function (dir, callback) {
-    console.log(dir, 'dir-------');
     fs.readdir("./uploads/"+dir+"/", function (err, files) {
         var allAlbum = [];
         var i = 0;
-        console.log(files, 'files--------');
+        if (err){
+            callback(err, null);
+        }
         if(!files){
             return;
         }
