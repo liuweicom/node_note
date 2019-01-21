@@ -56,7 +56,7 @@ exports.doPost = function (req, res) {
         var ran = parseInt(Math.random()*8999+1000);
         var extname = path.extname(files.tupian.name);
         var oldPath = files.tupian.path;
-        var newPath =path.normalize( __dirname+"/../uploads/"+fields.wenjianjia+"/"+ttt+ran+extname);
+        var newPath = path.normalize( __dirname+"/../uploads/"+fields.wenjianjia+"/"+ttt+ran+extname);
         fs.rename(oldPath,newPath,function (err) {
             if (err){
                 res.send("改名失败");
